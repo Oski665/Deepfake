@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                     if(imageView.getDrawable() != backgroundLogo) {
                         Toast.makeText(MainActivity.this, "Zdjęcie usunięte", Toast.LENGTH_SHORT).show();
                         textView.setText("Upload image to view");
-                        imageView.setImageDrawable(backgroundLogo);
+                        imageView.setImageResource(0);
                         flag = 0;
                     }
                     return true;
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addImgToHistry(ImageView imgView, int width, int height){
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
-        layoutParams.setMargins(8,0,8,0);
+        layoutParams.setMargins(12,0,12,0);
         imgView.setLayoutParams(layoutParams);
         imgView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -208,7 +208,8 @@ public class MainActivity extends AppCompatActivity {
         imgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(imageView.getDrawable() != imageView.getResources().getDrawable(R.drawable.pbslogo)){
+                //if(imageView.getDrawable() != imageView.getResources().getDrawable(R.drawable.pbslogo)){
+                if(imageView.getDrawable() != null){
                     holdFirst = imgView.getDrawable();
                     holdSecond = imageView.getDrawable();
                     imgView.setImageDrawable(holdSecond);
@@ -218,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
                     holdFirst = imgView.getDrawable();
                     imageView.setImageDrawable(holdFirst);
                     imgView.setVisibility(View.GONE);
+                    flag = 1;
                 }
             }
         });
@@ -235,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView imgView = new ImageView(MainActivity.this);
 //        imgView.setImageResource(R.drawable.dynamicimageshape);
         imgView.setImageURI(tempImg);
-        addImgToHistry(imgView,300,300);
+        addImgToHistry(imgView,180,270);
     }
 
 }
