@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -18,6 +19,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +30,8 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -43,17 +47,31 @@ public class MainActivity extends AppCompatActivity {
     public static final int GALLERY_REQUEST_CODE = 1235;
     ImageView imageView;
     Button btnOpenCamera, btnOpenGallery;
-    Uri imageUri;
-    String currentPhotoPath;
+    Uri imageUri, tempImg;
+    LinearLayout linearLayout;
+    String uriBgLogo= "@drawable/pbslogo";
+    Drawable backgroundLogo, imageShapes, holdFirst, holdSecond;
+    int flag = 0;
+    TextView textView;
+    CardView cardView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_Deepfake);
         setContentView(R.layout.activity_main);
 
         imageView = findViewById(R.id.ivCamera);
         btnOpenCamera = findViewById(R.id.btOpenCamera);
         btnOpenGallery = findViewById(R.id.btOpenGallery);
+        linearLayout = findViewById(R.id.historyGallery);
+        textView = findViewById(R.id.tvUploadImage);
+        cardView = findViewById(R.id.cvDynamic);
+
+
+        int imgResource = getResources().getIdentifier(uriBgLogo, null, getPackageName());
+        backgroundLogo = getResources().getDrawable(imgResource);
 
         btnOpenCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +100,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(gallery, GALLERY_REQUEST_CODE);
             }
         });
+
+
+            imageView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if(imageView.getDrawable() != backgroundLogo) {
+                        Toast.makeText(MainActivity.this, "Zdjęcie usunięte", Toast.LENGTH_SHORT).show();
+                        textView.setText("Upload image to view");
+                        imageView.setImageDrawable(backgroundLogo);
+                        flag = 0;
+                    }
+                    return true;
+                }
+            });
+
     }
 
     private void openCamera(){
@@ -113,8 +146,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == CAPTURE_CODE){
-            if(resultCode == RESULT_OK){;
-                imageView.setImageURI(imageUri);
+            if(resultCode == RESULT_OK){
+                if(flag == 1){
+                    holdPict(tempImg);
+                    imageView.setImageURI(imageUri);
+                    flag = 0;
+                }
+
+                if(flag == 0){
+                    saveTempCam();
+                    flag = 1;
+                }
             }
         }
         if(requestCode == GALLERY_REQUEST_CODE){
@@ -123,15 +165,77 @@ public class MainActivity extends AppCompatActivity {
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                 String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);
                 Log.d("tag","onActivityResult: Gallery Image Uri: " + imageFileName);
-                imageView.setImageURI(contentUri);
+                if(flag == 1){
+                    holdPict(tempImg);
+                    imageView.setImageURI(contentUri);
+                    textView.setText("Current choice");
+                    flag = 0;
+                }
+
+                if(flag == 0){
+                    saveTempGall(contentUri);
+                    textView.setText("Current choice");
+                    flag = 1;
+                }
             }
         }
+    }
+
+    public void saveTempCam(){
+        imageView.setImageURI(imageUri);
+        tempImg = imageUri;
+    }
+    public void saveTempGall(Uri contentUri){
+        imageView.setImageURI(contentUri);
+        tempImg = contentUri;
+    }
+
+    public void addImgToHistry(ImageView imgView, int width, int height){
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
+        layoutParams.setMargins(8,0,8,0);
+        imgView.setLayoutParams(layoutParams);
+        imgView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if(imgView.getDrawable() != null) {
+                    Toast.makeText(MainActivity.this, "Zdjęcie usunięte", Toast.LENGTH_SHORT).show();
+                    imgView.setVisibility(View.GONE);
+                }
+                return true;
+            }
+        });
+
+        imgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(imageView.getDrawable() != imageView.getResources().getDrawable(R.drawable.pbslogo)){
+                    holdFirst = imgView.getDrawable();
+                    holdSecond = imageView.getDrawable();
+                    imgView.setImageDrawable(holdSecond);
+                    imageView.setImageDrawable(holdFirst);
+                }
+                else{
+                    holdFirst = imgView.getDrawable();
+                    imageView.setImageDrawable(holdFirst);
+                    imgView.setVisibility(View.GONE);
+                }
+            }
+        });
+        //cardView.addView(imgView);
+        linearLayout.addView(imgView);
     }
 
     private String getFileExt(Uri contentUri) {
         ContentResolver c = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(c.getType(contentUri));
+    }
+
+    public void holdPict(Uri tempUri){
+        ImageView imgView = new ImageView(MainActivity.this);
+//        imgView.setImageResource(R.drawable.dynamicimageshape);
+        imgView.setImageURI(tempImg);
+        addImgToHistry(imgView,300,300);
     }
 
 }
