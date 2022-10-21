@@ -34,6 +34,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int CAPTURE_CODE = 1001;
     public static final int GALLERY_REQUEST_CODE = 1235;
     ImageView imageView;
-    Button btnOpenCamera, btnOpenGallery;
+    FloatingActionButton btnOpenCamera, btnOpenGallery;
     Uri imageUri, tempImg;
     LinearLayout linearLayout;
     String uriBgLogo= "@drawable/pbslogo";
@@ -63,11 +65,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         imageView = findViewById(R.id.ivCamera);
-        btnOpenCamera = findViewById(R.id.btOpenCamera);
-        btnOpenGallery = findViewById(R.id.btOpenGallery);
+        btnOpenCamera = findViewById(R.id.fbtOpenCamera);
+        btnOpenGallery = findViewById(R.id.fbtOpenGallery);
         linearLayout = findViewById(R.id.historyGallery);
         textView = findViewById(R.id.tvUploadImage);
-        cardView = findViewById(R.id.cvDynamic);
+//        cardView = findViewById(R.id.cvDynamic);
 
 
         int imgResource = getResources().getIdentifier(uriBgLogo, null, getPackageName());
@@ -105,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
             imageView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    if(imageView.getDrawable() != backgroundLogo) {
-                        Toast.makeText(MainActivity.this, "Zdjęcie usunięte", Toast.LENGTH_SHORT).show();
+                    if(imageView.getDrawable() != null) {
+                        Toast.makeText(MainActivity.this, "Image removed", Toast.LENGTH_SHORT).show();
                         textView.setText("Upload image to view");
                         imageView.setImageResource(0);
                         flag = 0;
@@ -198,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 if(imgView.getDrawable() != null) {
-                    Toast.makeText(MainActivity.this, "Zdjęcie usunięte", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Image removed", Toast.LENGTH_SHORT).show();
                     imgView.setVisibility(View.GONE);
                 }
                 return true;

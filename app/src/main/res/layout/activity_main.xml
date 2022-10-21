@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="10dp"
+    android:padding="2dp"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
@@ -18,7 +18,9 @@
         android:gravity="center"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="5dp"/>
+
+
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -31,73 +33,64 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/pbslogo"/>
+            android:src="@drawable/pbslogo"
+            android:scaleType="fitCenter"/>
+
         <ImageView
             tools:ignore="ContentDescription"
             android:id="@+id/ivCamera"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY" />
+            android:scaleType="centerCrop" />
     </com.google.android.material.card.MaterialCardView>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/customborder">
 
         <LinearLayout
             android:id="@+id/historyGallery"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:orientation="horizontal">
         </LinearLayout>
     </HorizontalScrollView>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btOpenCamera"
-            android:foreground="@drawable/ic_addcamera"
-            android:background="?android:attr/selectableItemBackground"
-            android:elevation="8dp"
-            android:padding="16dp"
-            android:layout_marginTop="5dp"/>
+            app:fab_addButtonColorNormal="#19191a"
+            app:fab_expandDirection="left"
+            app:fab_labelsPosition="right"
+            app:layout_constraintBaseline_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"/>
 
-<!--        <ImageButton-->
-<!--            android:layout_width="56dp"-->
-<!--            android:layout_height="56dp"-->
-<!--            android:background="@drawable/buttong_background"-->
-<!--            android:padding="16dp"-->
-<!--            android:scaleType="fitXY"-->
-<!--            android:elevation="8dp"-->
-<!--            android:src="@drawable/ic_add"-->
-<!--            android:layout_marginTop="5dp">-->
-<!--        </ImageButton>-->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"/>
-        <Button
-            android:id="@+id/btOpenGallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:foreground="@drawable/ic_addgallery"
-            android:background="?android:attr/selectableItemBackground"
-            android:padding="16dp"
-            android:layout_marginTop="5dp" />
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fbtOpenCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="#19191a"
+                app:fab_icon="@drawable/ic_addcamera"/>
 
-    </LinearLayout>
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fbtOpenGallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="#19191a"
+                app:fab_icon="@drawable/ic_addgallery"/>
+
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>
