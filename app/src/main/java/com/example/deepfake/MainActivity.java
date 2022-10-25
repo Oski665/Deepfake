@@ -19,6 +19,9 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -29,6 +32,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,6 +40,7 @@ import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -48,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int CAPTURE_CODE = 1001;
     public static final int GALLERY_REQUEST_CODE = 1235;
     ImageView imageView;
-    FloatingActionButton btnOpenCamera, btnOpenGallery;
-    Uri imageUri, tempImg;
+    FloatingActionButton btnOpenCamera, btnOpenGallery, btnSwitchAct;
+    Uri imageUri, tempImg, contentUri;
     LinearLayout linearLayout;
     String uriBgLogo= "@drawable/pbslogo";
     Drawable backgroundLogo, imageShapes, holdFirst, holdSecond;
@@ -67,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         imageView = findViewById(R.id.ivCamera);
         btnOpenCamera = findViewById(R.id.fbtOpenCamera);
         btnOpenGallery = findViewById(R.id.fbtOpenGallery);
+        btnSwitchAct = findViewById(R.id.fbtSwitchView);
         linearLayout = findViewById(R.id.historyGallery);
         textView = findViewById(R.id.tvUploadImage);
 //        cardView = findViewById(R.id.cvDynamic);
@@ -117,6 +123,29 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+
+        btnSwitchAct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                imageView.setDrawingCacheEnabled(true);
+//                Bitmap bitmap = imageView.getDrawingCache();
+                Intent intent = new Intent(MainActivity.this, ImageProcessing.class);
+//                Bitmap convertedbitmap = getResizedBitmap(bitmap, 300);
+//                intent.putExtra("picture",convertedbitmap);
+//                startActivity(intent);
+//                if(imageUri != null){
+//                    intent.putExtra("image",imageUri.toString());
+//                    startActivity(intent);
+//                }
+//                else{
+//                    intent.putExtra("image",contentUri.toString());
+//                    startActivity(intent);
+//                }
+                intent.putExtra("image",tempImg.toString());
+                startActivity(intent);
+            }
+        });
     }
 
     private void openCamera(){
@@ -163,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if(requestCode == GALLERY_REQUEST_CODE){
             if(resultCode == RESULT_OK){
-                Uri contentUri = data.getData();
+                contentUri = data.getData();
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                 String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);
                 Log.d("tag","onActivityResult: Gallery Image Uri: " + imageFileName);
@@ -207,6 +236,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Tutaj ogarnąć zmianę Uri ze zdjęć
         imgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -242,4 +273,19 @@ public class MainActivity extends AppCompatActivity {
         addImgToHistry(imgView,180,270);
     }
 
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float)width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+    
 }
