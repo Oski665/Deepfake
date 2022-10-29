@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Deepfake"
 include ':app'
+include ':openCV'

@@ -3,35 +3,96 @@ package com.example.deepfake;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+
+import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfRect;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.objdetect.CascadeClassifier;
 
 import java.io.Serializable;
 
 
 public class ImageProcessing extends AppCompatActivity {
 
-    ImageView ivProc;
-    Uri imgVal;
+    ImageView ivPreProc, ivPostProc;
+    Button btnDetect;
+    Mat matrix;
+    String imagePathLoaded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        OpenCVLoader.initDebug();
         setTheme(R.style.Theme_Deepfake);
         setContentView(R.layout.activity_image_processing);
 
-        ivProc = findViewById(R.id.ivProccesing);
+        ivPreProc = findViewById(R.id.ivPreProccesing);
+        ivPostProc = findViewById(R.id.ivPreProccesing);
+        btnDetect = findViewById(R.id.btnProccesing);
 
         Intent intent = getIntent();
         String imagePath = intent.getStringExtra("image");
-        Uri fileUri = Uri.parse(imagePath);
-        ivProc.setImageURI(fileUri);
 
-//        Intent intent = getIntent();
-//        Bitmap bitmap = (Bitmap) intent.getParcelableExtra("picture");
-//        ivProc.setImageBitmap(bitmap);
+
+        Uri fileUri = Uri.parse(imagePath);
+        ivPreProc.setImageURI(fileUri);
+
+        imagePathLoaded = getAbsolutePath(fileUri);
+        matrix = Imgcodecs.imread(imagePathLoaded);
+
+        btnDetect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                detectFace(matrix);
+            }
+        });
+
     }
+    public String getAbsolutePath(Uri uri){
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = managedQuery(uri, proj, null, null, null);
+        int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(columnIndex);
+    }
+
+    public void detectFace(Mat matrix){
+        Imgproc.cvtColor(matrix, matrix,Imgproc.COLOR_RGB2BGRA);
+
+        Mat mat = matrix.clone();
+        CascadeClassifier cascadeClassifier = new CascadeClassifier();
+
+        MatOfRect faceArray = new MatOfRect();
+        cascadeClassifier.detectMultiScale(mat,faceArray);
+
+        int numFaces = faceArray.toArray().length;
+        for(Rect face : faceArray.toArray()){
+            Imgproc.rectangle(mat,
+                    new Point(face.x,face.y),
+                    new Point(face.x + face.width,face.y + face.height),
+                    new Scalar(0,0,255),5);
+        }
+
+        Mat finalMatrix = mat.clone();
+        Bitmap bitmap = Bitmap.createBitmap(finalMatrix.cols(),finalMatrix.rows(), Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(finalMatrix,bitmap);
+        ivPostProc.setImageBitmap(bitmap);
+
+    }
+
 }

@@ -36,6 +36,7 @@ dependencies {
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.getbase:floatingactionbutton:1.10.1'
+    implementation project(path: ':openCV')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
