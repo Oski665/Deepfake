@@ -2,6 +2,7 @@ package com.example.deepfake;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,6 +26,9 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.Serializable;
 
 
@@ -77,6 +82,25 @@ public class ImageProcessing extends AppCompatActivity {
         Mat mat = matrix.clone();
         CascadeClassifier cascadeClassifier = new CascadeClassifier();
 
+        try{
+
+            InputStream is = this.getResources().openRawResource(R.raw.lbpcascade_frontalface);
+            File cascadeDir = getDir("cascade", Context.MODE_PRIVATE);
+            File mCascadeFile = new File(cascadeDir, "lbpcascade_frontface.xml");
+            FileOutputStream os = new FileOutputStream(mCascadeFile);
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = is.read(buffer)) != -1){
+                os.write(buffer, 0, bytesRead);
+            }
+            is.close();
+            os.close();
+
+            cascadeClassifier = new CascadeClassifier(mCascadeFile.getAbsolutePath());
+        }catch(Exception e){
+            Log.e("OpenCVActivity", "Error loading cascade", e);
+        }
+
         MatOfRect faceArray = new MatOfRect();
         cascadeClassifier.detectMultiScale(mat,faceArray);
 
@@ -85,7 +109,7 @@ public class ImageProcessing extends AppCompatActivity {
             Imgproc.rectangle(mat,
                     new Point(face.x,face.y),
                     new Point(face.x + face.width,face.y + face.height),
-                    new Scalar(0,0,255),5);
+                    new Scalar(3, 182, 252),40);
         }
 
         Mat finalMatrix = mat.clone();
