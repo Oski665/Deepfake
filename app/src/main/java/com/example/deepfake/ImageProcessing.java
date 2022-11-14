@@ -35,9 +35,10 @@ import java.io.Serializable;
 public class ImageProcessing extends AppCompatActivity {
 
     ImageView ivPreProc, ivPostProc;
-    Button btnDetect;
+    Button btnDetect, btnRote;
     Mat matrix;
     String imagePathLoaded;
+    int angle = 90;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,9 @@ public class ImageProcessing extends AppCompatActivity {
         setContentView(R.layout.activity_image_processing);
 
         ivPreProc = findViewById(R.id.ivPreProccesing);
-        ivPostProc = findViewById(R.id.ivPreProccesing);
+        ivPostProc = findViewById(R.id.ivPostProccesing);
         btnDetect = findViewById(R.id.btnProccesing);
+        btnRote = findViewById(R.id.btnRotate);
 
         Intent intent = getIntent();
         String imagePath = intent.getStringExtra("image");
@@ -67,6 +69,13 @@ public class ImageProcessing extends AppCompatActivity {
             }
         });
 
+        btnRote.setOnClickListener(new View.OnClickListener(){
+           @Override
+            public void onClick(View view){
+               ivPreProc.setRotation(angle);
+               angle+=90;
+           }
+        });
     }
     public String getAbsolutePath(Uri uri){
         String[] proj = {MediaStore.Images.Media.DATA};
