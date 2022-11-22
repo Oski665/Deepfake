@@ -66,7 +66,7 @@
         <com.getbase.floatingactionbutton.FloatingActionsMenu
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:fab_addButtonColorNormal="#19191a"
+            app:fab_addButtonColorNormal="#018dca"
             app:fab_expandDirection="left"
             app:fab_labelsPosition="right"
             app:layout_constraintBaseline_toBottomOf="parent"
@@ -77,21 +77,21 @@
                 android:id="@+id/fbtOpenCamera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fab_colorNormal="#19191a"
+                app:fab_colorNormal="#018dca"
                 app:fab_icon="@drawable/ic_addcamera"/>
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fbtOpenGallery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fab_colorNormal="#19191a"
+                app:fab_colorNormal="#018dca"
                 app:fab_icon="@drawable/ic_addgallery"/>
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fbtSwitchView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fab_colorNormal="#19191a"
+                app:fab_colorNormal="#018dca"
                 app:fab_icon="@drawable/ic_nextfrag"/>
 
         </com.getbase.floatingactionbutton.FloatingActionsMenu>

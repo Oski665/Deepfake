@@ -22,6 +22,7 @@
         <entry key="..\:/Users/48534/AndroidStudioProjects/Deepfake/app/src/main/res/xml/file_paths.xml" value="0.1" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2635" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/bg_label.xml" value="0.3675" />
+        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/button_shadow.xml" value="0.3495" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/buttong_background.xml" value="0.2635" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/cbfi.xml" value="0.2635" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/customborder.xml" value="0.2635" />
@@ -29,12 +30,18 @@
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/ic_add.xml" value="0.2635" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/ic_addcamera.xml" value="0.3675" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/ic_addgallery.xml" value="0.3675" />
+        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/ic_create_deepfake.xml" value="0.3505" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/ic_darrow.xml" value="0.19" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/ic_deepfakelogo.xml" value="0.2635" />
+        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/ic_face_detection.xml" value="0.3505" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2635" />
+        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/ic_nextfrag.xml" value="0.3505" />
+        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/ic_rotate_left.xml" value="0.3505" />
+        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/ic_rotate_right.xml" value="0.3505" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/rectangle_shape.xml" value="0.2635" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/splash_layout.xml" value="0.2635" />
-        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/layout/activity_image_processing.xml" value="0.33" />
+        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/layout-v28/activity_image_processing.xml" value="0.5" />
+        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/layout/activity_image_processing.xml" value="0.4447739065974796" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/layout/activity_main.xml" value="0.1930261519302615" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/layout/dynamicshapecardview.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/layout/fab_menu.xml" value="0.5474339035769828" />

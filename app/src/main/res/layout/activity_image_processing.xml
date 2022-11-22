@@ -8,39 +8,144 @@
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-        <Button
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFaceDetection"
+            android:layout_marginStart="5dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnProccesing"
-            android:text="dectect"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnRotate"
-            android:text="Rotate"/>
-    </LinearLayout>
+            android:layout_height="45dp"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="50dp"
+            app:icon="@drawable/ic_face_detection"
+            app:iconGravity="textStart"
+            android:text="Face detect"
+            android:textStyle="bold"
+            app:iconPadding="2dp"
+            app:iconSize="40dp"
+            android:backgroundTint="#018dca"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRotateLeft"
+                android:layout_marginLeft="5dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                app:cornerRadius="50dp"
+                app:icon="@drawable/ic_rotate_left"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="25dp"
+                android:backgroundTint="#018dca"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRotateRight"
+                android:layout_marginLeft="5dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                app:cornerRadius="50dp"
+                app:icon="@drawable/ic_rotate_right"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="25dp"
+                android:backgroundTint="#018dca"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="340dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2">
         <ImageView
+            android:id="@+id/ivPreProccesing"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/ivPreProccesing"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="340dp">
-        <ImageView
+            android:layout_weight="1" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLoadVideo"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                app:cornerRadius="50dp"
+                app:icon="@drawable/ic_video_load"
+                app:iconGravity="textStart"
+                android:text="load video"
+                android:textStyle="bold"
+                app:iconPadding="5dp"
+                app:iconSize="25dp"
+                android:backgroundTint="#018dca"/>
+
+        </LinearLayout>
+
+        <VideoView
+            android:id="@+id/vvImgProcessing"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/ivPostProccesing"/>
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            android:outlineAmbientShadowColor="@color/black"/>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCreateDeepfake"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                app:cornerRadius="50dp"
+                app:icon="@drawable/ic_create_deepfake"
+                app:iconGravity="textStart"
+                android:text="Create deepfake"
+                android:textStyle="bold"
+                app:iconPadding="5dp"
+                app:iconSize="25dp"
+                android:backgroundTint="#018dca"/>
+        </LinearLayout>
     </LinearLayout>
-
-
-
 
 </LinearLayout>
