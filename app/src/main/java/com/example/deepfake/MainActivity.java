@@ -1,67 +1,48 @@
 package com.example.deepfake;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
-import android.widget.Button;
-import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int PERMISSION_CODE = 1234;
-    private static final int CAPTURE_CODE = 1001;
+    public static final int PERMISSION_CODE = 1234;
+    public static final int CAPTURE_CODE = 1001;
     public static final int GALLERY_REQUEST_CODE = 1235;
     ImageView imageView;
     FloatingActionButton btnOpenCamera, btnOpenGallery, btnSwitchAct;
     Uri imageUri, tempImg, contentUri;
     LinearLayout linearLayout;
     String uriBgLogo= "@drawable/pbslogo";
-    Drawable backgroundLogo, imageShapes, holdFirst, holdSecond;
+    Drawable backgroundLogo, holdFirst, holdSecond;
     int flag = 0;
     TextView textView;
-    CardView cardView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
         btnSwitchAct = findViewById(R.id.fbtSwitchView);
         linearLayout = findViewById(R.id.historyGallery);
         textView = findViewById(R.id.tvUploadImage);
-//        cardView = findViewById(R.id.cvDynamic);
-
 
         int imgResource = getResources().getIdentifier(uriBgLogo, null, getPackageName());
         backgroundLogo = getResources().getDrawable(imgResource);
@@ -109,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
             imageView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
@@ -123,32 +101,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-
         btnSwitchAct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-//                imageView.setDrawingCacheEnabled(true);
-//                Bitmap bitmap = imageView.getDrawingCache();
                 Intent intent = new Intent(MainActivity.this, ImageProcessing.class);
-//                Bitmap convertedbitmap = getResizedBitmap(bitmap, 300);
-//                intent.putExtra("picture",convertedbitmap);
-//                startActivity(intent);
-//                if(imageUri != null){
-//                    intent.putExtra("image",imageUri.toString());
-//                    startActivity(intent);
-//                }
-//                else{
-//                    intent.putExtra("image",contentUri.toString());
-//                    startActivity(intent);
-//                }
                 intent.putExtra("image",tempImg.toString());
                 startActivity(intent);
             }
         });
     }
 
-    private void openCamera(){
+    public void openCamera(){
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE,"new image");
         values.put(MediaStore.Images.Media.DESCRIPTION,"From the camera");
@@ -237,11 +201,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Tutaj ogarnąć zmianę Uri ze zdjęć
         imgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //if(imageView.getDrawable() != imageView.getResources().getDrawable(R.drawable.pbslogo)){
                 if(imageView.getDrawable() != null){
                     holdFirst = imgView.getDrawable();
                     holdSecond = imageView.getDrawable();
@@ -256,7 +218,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        //cardView.addView(imgView);
         linearLayout.addView(imgView);
     }
 
@@ -268,24 +229,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void holdPict(Uri tempUri){
         ImageView imgView = new ImageView(MainActivity.this);
-//        imgView.setImageResource(R.drawable.dynamicimageshape);
         imgView.setImageURI(tempImg);
         addImgToHistry(imgView,180,270);
     }
 
-    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
-        int width = image.getWidth();
-        int height = image.getHeight();
-
-        float bitmapRatio = (float)width / (float) height;
-        if (bitmapRatio > 1) {
-            width = maxSize;
-            height = (int) (width / bitmapRatio);
-        } else {
-            height = maxSize;
-            width = (int) (height * bitmapRatio);
-        }
-        return Bitmap.createScaledBitmap(image, width, height, true);
-    }
-    
 }

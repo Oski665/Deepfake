@@ -2,6 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/python" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/python/first-order-model" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/python/fom" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/first-order-model" vcs="Git" />
   </component>
 </project>

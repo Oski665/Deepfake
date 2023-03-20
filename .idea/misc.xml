@@ -21,7 +21,9 @@
         <entry key="..\:/Users/48534/AndroidStudioProjects/Deepfake/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="..\:/Users/48534/AndroidStudioProjects/Deepfake/app/src/main/res/xml/file_paths.xml" value="0.1" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2635" />
+        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/bg_custom_seekbar.xml" value="0.3455" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/bg_label.xml" value="0.3675" />
+        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/bg_progress.xml" value="0.3455" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/button_shadow.xml" value="0.3495" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/buttong_background.xml" value="0.2635" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/cbfi.xml" value="0.2635" />
@@ -41,8 +43,9 @@
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/rectangle_shape.xml" value="0.2635" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/drawable/splash_layout.xml" value="0.2635" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/layout-v28/activity_image_processing.xml" value="0.5" />
+        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/layout/activity_deepfake_download.xml" value="0.5" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/layout/activity_image_processing.xml" value="0.4447739065974796" />
-        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/layout/activity_main.xml" value="0.1930261519302615" />
+        <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/layout/activity_main.xml" value="0.67" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/layout/dynamicshapecardview.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/Oskar/AndroidStudioProjects/Deepfake/app/src/main/res/layout/fab_menu.xml" value="0.5474339035769828" />
       </map>

@@ -109,12 +109,17 @@
                 app:iconSize="25dp"
                 android:backgroundTint="#018dca"/>
 
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
         <VideoView
             android:id="@+id/vvImgProcessing"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="match_parent "
             android:layout_gravity="center"
             android:layout_weight="1"
             android:visibility="invisible"
@@ -140,11 +145,12 @@
                 app:cornerRadius="50dp"
                 app:icon="@drawable/ic_create_deepfake"
                 app:iconGravity="textStart"
-                android:text="Create deepfake"
+                android:text="Load deepfake"
                 android:textStyle="bold"
                 app:iconPadding="5dp"
                 app:iconSize="25dp"
                 android:backgroundTint="#018dca"/>
+
         </LinearLayout>
     </LinearLayout>
 
